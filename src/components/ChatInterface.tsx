@@ -137,15 +137,15 @@ export const ChatInterface = () => {
         ))}
         
         {isTyping && (
-          <div className="flex items-center gap-3 animate-fade-in">
-            <div className="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-full bg-gradient-primary text-primary-foreground shadow-lg">
-              <Sparkles className="h-4 w-4 animate-pulse" />
+          <div className="flex items-center gap-3 animate-scale-in">
+            <div className="flex h-10 w-10 shrink-0 select-none items-center justify-center rounded-full bg-gradient-primary text-primary-foreground shadow-2xl animate-pulse-glow">
+              <Sparkles className="h-5 w-5 animate-spin" />
             </div>
-            <div className="bg-chat-bot border rounded-2xl px-4 py-3 mr-12">
-              <div className="flex space-x-1">
-                <div className="h-2 w-2 bg-muted-foreground rounded-full animate-bounce" />
-                <div className="h-2 w-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
-                <div className="h-2 w-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+            <div className="bg-card/90 backdrop-blur-sm border border-primary/20 rounded-2xl px-5 py-4 mr-12 shadow-lg">
+              <div className="flex space-x-2">
+                <div className="h-3 w-3 bg-primary rounded-full animate-bounce" />
+                <div className="h-3 w-3 bg-secondary rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
+                <div className="h-3 w-3 bg-accent rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
               </div>
             </div>
           </div>
@@ -154,17 +154,18 @@ export const ChatInterface = () => {
       </div>
 
       {/* Quick Responses */}
-      <div className="p-4 border-t bg-muted/30">
-        <div className="mb-3">
-          <p className="text-sm text-muted-foreground mb-2">Quick questions:</p>
-          <div className="flex flex-wrap gap-2">
+      <div className="p-4 border-t bg-card/20 backdrop-blur-md animate-slide-in-left">
+        <div className="mb-4">
+          <p className="text-sm text-muted-foreground mb-3 font-medium">Quick questions:</p>
+          <div className="flex flex-wrap gap-3">
             {quickResponses.slice(0, 3).map((response, index) => (
               <Button
                 key={index}
                 variant="outline"
                 size="sm"
                 onClick={() => handleQuickResponse(response)}
-                className="text-xs hover:bg-accent/10"
+                className="text-xs hover:bg-primary/10 hover:border-primary/50 hover:scale-105 transition-all duration-300 animate-fade-in shadow-md backdrop-blur-sm"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {response}
               </Button>
@@ -173,19 +174,19 @@ export const ChatInterface = () => {
         </div>
 
         {/* Input Area */}
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Ask about schedules, facilities, dining, library, or admin..."
-            className="flex-1"
+            className="flex-1 backdrop-blur-sm bg-card/50 border-primary/30 focus:border-primary/60 focus:ring-primary/20 transition-all duration-300 shadow-md"
             disabled={isTyping}
           />
           <Button 
             onClick={handleSend} 
             disabled={!input.trim() || isTyping}
-            className="bg-gradient-primary hover:opacity-90 shadow-lg"
+            className="bg-gradient-primary hover:opacity-90 shadow-2xl hover:shadow-primary/50 hover:scale-105 transition-all duration-300 animate-pulse-glow"
           >
             <Send className="h-4 w-4" />
           </Button>
